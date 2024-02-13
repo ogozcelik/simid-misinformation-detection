@@ -1,7 +1,7 @@
 # SiMiD - Similarity-based Misinformation Detection
 
 This repository contains the official implementation of the SiMiD model presented in "Misinformation detection by leveraging user communities: A similarity-based approach on social media posts" IP&M 2024 paper (under-review).
-
+![SiMiD](illustration.png)
 ## Datasets
 
 The study uses publicly available [`Twitter15`](https://www.dropbox.com/s/7ewzdrbelpmrnxu/rumdetect2017.zip?dl=0), [`Twitter16`](https://www.dropbox.com/s/7ewzdrbelpmrnxu/rumdetect2017.zip?dl=0), and [`MiDe22`](https://github.com/avaapm/mide22) datasets. We just provide the expected formats of the datasets to run SiMiD model in `dataset` folder. Only `true` and `false` claim labels are employed as the ground truth. Since the original datasets do not contain user profiles and user follower/following information, given user IDs are used to obtain user data via Twitter API. Due to the privacy, we can not provide the data we crawled from the API. However, you may crawl the necessary information via Twitter API and preprocess the data as in the expected formats provided in `dataset` folder.
