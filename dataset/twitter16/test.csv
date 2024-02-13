@@ -1,0 +1,3 @@
+tweet_id,user_id,label,text
+123456546987,0123,1, this is a true tweet
+564654231659,01562,0, this is a false tweet text
