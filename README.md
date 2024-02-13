@@ -34,7 +34,7 @@ After obtaining aforementioned data, you should obtain `engagers.csv` file. The 
 
 ### Fine-tuning of SBERT model
 
-Example commands for fine-tuning SBERT model with pseudo-labelled pairs constructred from `twitter15` dataset is below:
+Example commands for fine-tuning [SBERT](https://www.sbert.net/) model with pseudo-labelled pairs constructred from `twitter15` dataset is below:
 
 ```bash
 $ python3 'src/sbert_trainer.py' twitter15 'dataset/twitter15/' 'src/contrastive_sbert/' 5
