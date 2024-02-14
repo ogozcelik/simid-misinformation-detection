@@ -26,6 +26,10 @@ These commands create a virtual environment named `simid_env`. The environment i
 
 ## Stages
 
+<p align="center">
+  <img src="https://github.com/ogozcelik/simid-misinformation-detection/blob/main/pseudo-code.png" width="50%" />
+</p>
+
 ### Community Construction
 
 To construct social networks and detect communities, we need to obtain engagers. Engagers are the users who retweet or repost other users' tweets (refer to paper for more detail of the definitions). We collect followers of each user in the datasets using [Twitter API](https://developer.twitter.com/en/products/twitter-api). After obtaining the followers, we only keep the users who have retweeted any of the user from the datasets. Thus, we end up with the engagers who follow other users and retweet the tweets from the datasets. Next, we randomly choose 20% of root users in the datasets to construct social network (here root users are the users who post tweets). Please note that you need to create `train.csv`, `val.csv`, and `test.csv` after this random selection process using the remaining part of the dataset. For a fair train and evaluation we need to keep apart these splits (i.e., social network and train val test files). After that, we use [Gephi](https://gephi.org/) to create social network. The edges are undirected, and nodes are users who follows each other. Using Gephi, we detect communities with Louvain clustering algorithm and obtain `engagers.csv` and `id2tweet.csv` files. In `engagers.csv`, there is a column named `related_tweets`, which is for each node in the social network. It corresponds to tweets IDs of a users' connections. For instance, let an engager node "A" (i.e., a user) is connected to another node "B". If node "B" has published three tweets, then `related_tweets` of node "B" is tweet IDs of that three tweets separated with "%", e.g., 123456%45644554%778464897.
@@ -57,10 +61,6 @@ $ python3 'run.py' no-community 'dataset/twitter15/' 'src/contrastive_sbert/' 's
 ```
 
 For more details of each version, please refer to the ablation study of the original paper.
-
-<p align="center">
-  <img src="https://github.com/ogozcelik/simid-misinformation-detection/blob/main/pseudo-code.png" width="50%" />
-</p>
 
 ## Citation
 If you make use of this study, please cite the following paper:
