@@ -58,8 +58,8 @@ $ python3 'run.py' no-community 'dataset/twitter15/' 'src/contrastive_sbert/' 's
 
 For more details of each version, please refer to the ablation study of the original paper.
 
-<p align="center" width="50%">
-  <img src="https://github.com/ogozcelik/simid-misinformation-detection/blob/main/pseudo-code.png" />
+<p align="center">
+  <img src="https://github.com/ogozcelik/simid-misinformation-detection/blob/main/pseudo-code.png" width="50%" />
 </p>
 
 ## Citation
