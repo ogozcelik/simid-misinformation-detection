@@ -58,6 +58,8 @@ $ python3 'run.py' no-community 'dataset/twitter15/' 'src/contrastive_sbert/' 's
 
 For more details of each version, please refer to the ablation study of the original paper.
 
+![Pseudo Code](pseudo-code.png)
+
 ## Citation
 If you make use of this study, please cite the following paper:
 ```bibtex
