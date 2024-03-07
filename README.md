@@ -1,10 +1,24 @@
 # SiMiD - Similarity-based Misinformation Detection
 
-This repository contains the official implementation of the SiMiD model presented in "Misinformation detection by leveraging user communities: A similarity-based approach on social media posts" IP&M 2024 paper (under-review).
+This repository contains the official implementation of the SiMiD model presented in "Misinformation detection by leveraging user communities: A similarity-based approach on social media posts" paper.
 ![SiMiD](illustration.png)
 ## Datasets
 
 The study uses publicly available [`Twitter15`](https://www.dropbox.com/s/7ewzdrbelpmrnxu/rumdetect2017.zip?dl=0), [`Twitter16`](https://www.dropbox.com/s/7ewzdrbelpmrnxu/rumdetect2017.zip?dl=0), and [`MiDe22`](https://github.com/avaapm/mide22) datasets. We just provide the expected formats of the datasets to run SiMiD model in `dataset` folder. Only `true` and `false` claim labels are employed as the ground truth. Since the original datasets do not contain user profiles and user follower/following information, given user IDs are used to obtain user data via Twitter API. Due to the privacy, we can not provide the data we crawled from the API. However, you may crawl the necessary information via Twitter API and preprocess the data as in the expected formats provided in `dataset` folder.
+
+## Baseline Implementation Details
+
+Many of the models include published code along with well-documented procedures, SAFE and MetaAdapt, facilitating straightforward reimplementation. However, certain models, such as GCAN and TDSL, while having published code, lack comprehensive support for reimplementation by other researchers. For instance, the GCAN model has [source code](https://github.com/l852888/GCAN); however, it lacks essential information on execution and data structure, [hindering reimplementation](https://github.com/l852888/GCAN/issues). Similarly, TDSL poses challenges due to insufficient documentation about execution of the [source code](https://github.com/uvictor-git/fake\_news\_detection). In light of these challenges, we provide each reimplementation process.
+
+DTC model has no original code shared by authors or the research community utilizing the model. Nevertheless, the model is simple to reimplement since it requires a random forest model and various feature types obtained from the textual, user, or diffusion-based data. We use scikit-learn library to implement DTC. The features fed to the model are obtained from the original paper, but we could not use all features due to the unavailability of attributes for each dataset (e.g., depth, size, and node numbers of sub-trees of propagation trees). The SVM-RBF model, also lacking published code, can be reimplemented using the scikit-learn library. The challenging part is to provide event locations of the tweets. Since we do not have this information, we detect locations in tweet texts using the [named entity recognition (NER) function of spaCy library](https://spacy.io/models/en\#en\_core\_web\_sm). After detecting locations in texts, we use them as categorical features to the SVM-RBF model. The CRNN and BERT-BiGRU models are reimplemented, as the original codes for them are unavailable. 
+
+Utilizing CNN and GRU networks, we transform variable-length time series into fixed-length sequences using the algorithm provided by the authors for CRNN. For the BERT-BiGRU model, we first fine-tune the BERT model and obtain token embeddings to train the BiGRU model. Implementation is done using TensorFlow and Hugging Face with the provided hyper-parameters by the authors. Models such as SAFE and MetaAdapt have publicly available source code. We utilize these codes with slight modifications to incorporate our datasets.
+
+## Pseudo-code
+
+<p align="center">
+  <img src="https://github.com/ogozcelik/simid-misinformation-detection/blob/main/pseudo-code.png" width="50%" />
+</p>
 
 ## Environment
 - Python 3.8.10
@@ -23,12 +37,7 @@ $ pip install -r requirements.txt
 
 These commands create a virtual environment named `simid_env`. The environment includes all necessary packages to run SiMiD model.
 
-
 ## Stages
-
-<p align="center">
-  <img src="https://github.com/ogozcelik/simid-misinformation-detection/blob/main/pseudo-code.png" width="50%" />
-</p>
 
 ### Community Construction
 
